@@ -19,7 +19,7 @@ conda activate GSDTA
 conda install numpy, scipy, pandas, torch, torch_genometric
 ```
 3.Clone GSDTA
-+ After installing the required packages , you need to download GSDTA from github:
++ After installing the required packages , you need to download GS-DTA from github:
 ```
 git clone https://github.com/zhuziguang/GSDTA.git
 ```
