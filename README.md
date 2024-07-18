@@ -23,6 +23,7 @@ conda install numpy, scipy, pandas, torch, torch_genometric
 git clone https://github.com/zhuziguang/GSDTA.git
 ```
 Tested data(Davis and KIBA)
+
 The example data can be downloaded form   https://github.com/thinng/GraphDTA/tree/master/data()
 
 Usage
