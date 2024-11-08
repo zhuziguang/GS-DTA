@@ -53,6 +53,5 @@ python training_validation.py 0 0
 Where the first argument is for the  index of the datasets,0/1 for 'Davis' or 'KIBA'.Respectively,the second argument is for the index of the cuda.Be careful about the cuda you choose.
 This will returns the model that achieved the best MSE on the validation data throughout the training process,as well as the model's performance on the test data.
 
-
-
+The model weights are obtained from https://www.dropbox.com/scl/fo/73l2jobpp2h8mmhb3ejan/AJGmt7H3ErbOpphHfhabbg8?rlkey=icbnrnf6nf1thpl97d59y5zsu&st=97acgxng&dl=0
 
