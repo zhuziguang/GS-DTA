@@ -5,10 +5,6 @@ from random import shuffle
 import torch
 import time
 import torch.nn as nn
-from models.gat import GAT_GCN_Net
-from models.gat_gcn import GAT_GCN_CNN_BiLSTM_Transformer
-from models.gcn import GCNNet
-from models.ginconv import GINConvNet
 from models.gatv2_gcn import GATv2_GCN_CNN_BiLSTM_Transformer
 from utils import *
 
@@ -45,7 +41,7 @@ def predicting(model, device, loader):
 
 
 datasets = [['davis','kiba'][int(sys.argv[1])]] 
-modeling = [GINConvNet, GAT_GCN_Net, GATv2_GCN_CNN_BiLSTM_Transformer, GCNNet][int(sys.argv[2])]
+modeling = GATv2_GCN_CNN_BiLSTM_Transformer
 model_st = modeling.__name__
 
 cuda_name = "cuda:0"
@@ -57,7 +53,7 @@ TRAIN_BATCH_SIZE =512
 TEST_BATCH_SIZE = 512
 LR = 0.0005
 LOG_INTERVAL = 20
-NUM_EPOCHS = 2500
+NUM_EPOCHS = 1000
 
 print('Learning rate: ', LR)
 print('Epochs: ', NUM_EPOCHS)
@@ -91,13 +87,6 @@ for dataset in datasets:
         MSEs = ('Epoch\tRMSE\tMSE\tPearson\tSpearman\tCi\trm2')
         with open(file_MSE, 'w') as f:
             f.write(MSEs + '\n')
-        
-        pretrained_model_file="/home/zhuziguang/kiba-quanzhong/MSE_0.21343421936035156_CI_0.9038705198445256_rm2_0.7093355381639808_1721181463.0038657.model"
-        if os.path.isfile(pretrained_model_file):
-            model.load_state_dict(torch.load(pretrained_model_file))
-            print('Pretrained model loaded successfully!')
-        else:
-            print('No Pretrained model found!')
         
         for epoch in range(NUM_EPOCHS):
             train(model, device, train_loader, optimizer, epoch+1)
