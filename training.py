@@ -99,14 +99,18 @@ for dataset in datasets:
             Ci=ci(G,P)
             rm2=get_rm2(G.reshape(G.shape[0],-1),P.reshape(P.shape[0],-1))
             
-            if  ret[-1]>=0.70:
+            if ret[1]<best_mse:
+                with open(result_file_name,'w') as f:
+                    f.write(','.join(map(str,ret)))
+                
                 best_epoch = epoch+1
                 best_mse = ret[1]
                 best_ci = ret[-2]
-                best_rm2=ret[-1]
-                print('rmse improved at epoch ', best_epoch, '; best_mse,best_ci,best_rm2:', best_mse,best_ci,best_rm2,model_st,dataset)
-                #save_MSE_CI(MSE_CI,file_MSE)
-                torch.save(model.state_dict(), f'./davis_result/MSE_{best_mse}_CI_{best_ci}_rm2_{best_rm2}_{time.time()}.model')
+                MSE_CI=[epoch,RMSE,MSE,Pearson,Spearson,Ci,rm2]
+                
+                save_MSE_CI(MSE_CI,file_MSE)
+                torch.save(model.state_dict(), model_file_name)
+                print('rmse improved at epoch ', best_epoch, '; best_mse,best_ci:', best_mse,best_ci,model_st,dataset)
             else:
-                print(ret[1],'No improvement since epoch ', best_epoch, '; best_mse,best_ci:', best_mse,best_ci,model_st,dataset)    
+                print(ret[1],'No improvement since epoch ', best_epoch, '; best_mse,best_ci:', best_mse,best_ci,model_st,dataset)
             
