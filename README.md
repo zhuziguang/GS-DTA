@@ -32,7 +32,7 @@ Train Model
 
 1.Create Dataset  in pytorch format.
 ```
-python generate_data.py
+python create_data.py
 ```
 
 2.Train model
